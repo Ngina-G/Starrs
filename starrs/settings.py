@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'awwards.apps.AwwardsConfig',
-    'bootstrap5'
+    'bootstrap5',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
