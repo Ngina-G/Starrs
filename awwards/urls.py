@@ -1,12 +1,14 @@
-from django.urls import re_path, path
+from django.urls import include,path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
-#..............
+from rest_framework import  routers
 
-urlpatterns=[
-    path('', views.index, name='home'),
+router = routers.DefaultRouter()
+router.register('users',views.UserViewSet)
+router.register('posts',views.PostViewSet)
+router.register('profile',views.ProfileViewSet)
 
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('account/',include('django.contrib.auth.urls'), name='account'),
+    path('api/', include(router.urls)),
 ]
-if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
