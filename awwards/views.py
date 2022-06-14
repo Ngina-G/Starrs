@@ -34,6 +34,23 @@ def  index(request):
     return render(request, 'index.html', {'posts': posts,'form': form,'random_post': random_post})
 
 
+def  signup(request):
+    if request.method == 'POST':    
+        form = SignupForm(request.POST)
+        if form.is_valid(): 
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index')
+    else: 
+        form = SignupForm
+    return render(request, 'registration/signup.html', {'form': form}) 
+
+
+    
+
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
