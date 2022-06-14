@@ -8,11 +8,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 import random
-
+from random import randrange
 
 # Create your views here.
-
-
 def  index(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -49,7 +47,13 @@ def  signup(request):
     return render(request, 'registration/signup.html', {'form': form}) 
 
 
-    
+@login_required(login_url='login')
+def profile(request, username):
+    return render(request, 'profile.html')
+
+
+
+
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
