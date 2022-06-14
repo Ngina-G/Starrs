@@ -40,7 +40,13 @@ INSTALLED_APPS = [
     'awwards.apps.AwwardsConfig',
     'bootstrap5',
     'tinymce',
+    'pyuploadcare.dj',
 ]
+
+UPLOADCARE = {
+    'pub_key':'1d111b4d2405fb153a7',
+    'secret': '',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
