@@ -85,6 +85,54 @@ def  edit_userprofile(request, username):
         
     return render(request, 'awwards/edit_userprofile.html',context)
 
+@login_required(login_url='login')  
+def  projectPost(request,post):
+    post =Post.objects.get(title=post)
+    rating = Rating.objects.filter(user=request.user,post=post).first()
+    rating_status = None
+    if rating is None:
+        rating_status = False
+        
+    else:
+        rating_status = True
+        
+    if request.method == 'POST':
+        form = RatingForm(request.POST) 
+        if form.is_valid():
+            rate = form.save(commit =False)
+            rate.user = request.user
+            rate.post = post
+            rate.save()
+            post_ratings = Rating.objects.filter(post=post)
+            
+            design_ratings = [des.design for des in post_ratings]
+            design_average = sum(design_ratings) / len(design_ratings)
+
+            usability_ratings = [usa.usability for usa in post_ratings]
+            usability_average = sum(usability_ratings) / len(usability_ratings)
+
+            content_ratings = [content.content for content in post_ratings]
+            content_average = sum(content_ratings) / len(content_ratings)
+
+            rate.design_average = round(design_average, 2)
+            rate.usability_average = round(usability_average, 2)
+            rate.content_average = round(content_average, 2)
+            rate.save()
+            return HttpResponseRedirect(request.path_info)
+    
+    else:
+        form = RatingForm()
+    context = {
+        'post':post,
+        'rating_status':rating_status,
+        'rating_form':form,
+    }       
+           
+    return render(request, 'post.html',context)
+
+
+
+    
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
