@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # installed
     'awwards.apps.AwwardsConfig',
     'bootstrap5',
     'tinymce',
     'pyuploadcare.dj',
+    'rest_framework',
 ]
 
 UPLOADCARE = {
