@@ -20,3 +20,22 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('image', 'title', 'description', 'url',)
         
+class UpdateUserForm(forms.ModelForm):
+      email = forms.EmailField(max_length=255,help_text="Email address")
+      
+      class Meta:
+          model = User
+          fields = ('email', 'username')    
+          
+class UpdateUserProfileForm(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = ('profile_image', 'bio', 'name','email','location')    
+        
+                
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ('design', 'usability', 'content')         
+          
