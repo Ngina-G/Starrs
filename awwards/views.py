@@ -63,7 +63,27 @@ def  user_profile(request, username):
     return render(request, 'awwards/user_profile.html', context)
 
 
-
+@login_required(login_url='login') 
+def  edit_userprofile(request, username):
+    user = User.objects.get(username=username)
+    if request.method == 'POST': 
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        prof_form = UpdateUserProfileForm(request.POST, request. FILES,instance=request.user.profile)
+        if user_form.is_valid() and prof_form.is_valid:
+            user_form.save()
+            prof_form.save(commit=False)
+            return redirect('profile',user.username)
+        
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        prof_form = UpdateUserProfileForm(instance=request.user.profile)
+        
+    context = {
+        'user_form': user_form,
+        'prof_form': prof_form,
+    }         
+        
+    return render(request, 'awwards/edit_userprofile.html',context)
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
