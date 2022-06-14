@@ -131,7 +131,24 @@ def  projectPost(request,post):
     return render(request, 'post.html',context)
 
 
+def  search_project(request):
+    if request.method == 'GET':
+        title = request.GET.get('title')
+        results = Post.objects.filter(title__icontains=title).all()
+        print(results)
+        message = f'name'
+        context = {
+            'message': message, 
+            'results': results
+        }
+        return render(request, 'results.html', context)
+    else:
+        messsage = 'No results found for the specified title'
+        
+    return render(request, 'results.html', {'messsage': messages}) 
 
+
+# Serializers
     
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
