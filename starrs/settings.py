@@ -46,7 +46,7 @@ if config('MODE')=="dev":
        }
        
    }
-   
+
 # production
 else:
    DATABASES = {
@@ -89,7 +89,6 @@ UPLOADCARE = {
     'pub_key':'50a85fc3a8705a6dd08c',
     'secret': '',
 }
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
