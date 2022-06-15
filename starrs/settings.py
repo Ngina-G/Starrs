@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tinymce',
     'pyuploadcare.dj',
     'rest_framework',
+    'crispy_forms',
 ]
 
 UPLOADCARE = {
