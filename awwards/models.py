@@ -14,6 +14,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', )
     email = models.EmailField(max_length=255, blank=True) 
 
+    def __str__(self):
+        return f'{self.user.username}profile'
+    
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
@@ -22,20 +25,6 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
-
-    def save_profile(self):
-        self.user
-
-    def delete_profile(self):
-        self.delete()
-
-    @classmethod
-    def search_profile(cls, name):
-        return cls.objects.filter(user__username__icontains=name).all()
-
-    
-    def __str__(self):
-        return f'{self.user.username} profile'
 
     
 class Post(models.Model):    
