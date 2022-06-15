@@ -6,7 +6,7 @@ from .models import Profile,Post,Rating
 from .serializers import ProfileSerializer,UserSerializer,PostSerializer
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 import random
 
 # Create your views here.
@@ -55,7 +55,7 @@ def  signup(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('index')
+            return redirect('home')
     else: 
         form = SignupForm
     return render(request, 'registration/signup.html', {'form': form}) 
@@ -66,7 +66,7 @@ def profile(request, username):
     return render(request, 'awwards/profile.html')
 
 
-@login_required(login_url='login')   
+@login_required(login_url='accounts/login')   
 def  user_profile(request, username):
     user_prof = get_object_or_404(User, username=username)
     if request.user == user_prof:
@@ -161,7 +161,10 @@ def  search_project(request):
         
     return render(request, 'awwards/search.html', {'messsage': messages}) 
 
-
+def logout_user(request):
+    logout(request)
+    return redirect('home') 
+    
 # Serializers
     
 class ProfileViewSet(viewsets.ModelViewSet):
