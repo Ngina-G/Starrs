@@ -6,21 +6,47 @@
 
 
     <div class="container-fluid">
+
+            <div id="post">
+                  <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload a project</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                                        <input type="submit"  class="btn btn-sm btn-info" value= "Save changes">
+                                    </div>
+                                </form>
+                            
+                            </div>
+                        
+                        </div>
+                        </div>
+                    </div>
+            </div>
             <div class="card">
                     <div class="text-center mx-auto d-block text-white rounded bg-dark">
                             <img src="media/surface-G8NVSTtwLLI-unsplash.jpg" alt="Responsive image" class="card-img-top img-fluid w-100 " class="lazy" id="banner-img"/>
                     <div class="card-img-overlay">
-                        <a href="{% url 'project' random_post.title %}" class="site-link" aria-label=""></a>
+                        <a href="{% url 'post' random_post.title %}" class="site-link" aria-label=""></a>
                         <div class="inner vertical-center">
                             <div class="box-info">
                                 <div class="card-title">
                                     <h3 class="heading-large"> Project 
-                                        <a href="{% url 'project' random_post.title %}" style="margin-top:-100px;font-size: 2em;"><h1>{{ random_post.title }}</h1></a>
+                                        <a href="{% url 'post' random_post.title %}" style="margin-top:-100px;font-size: 2em;"><h1>{{ random_post.title }}</h1></a>
                                     </h3>
                                 </div>
                                 <div class="container">
                                     <div style="margin-bottom: 3em;">
-                                        by <strong><a href="">{{ random_post.user.username }}</a></strong> 
+                                        by <strong><a href="{% url 'profile' user.username %}">{{ random_post.user.username }}</a></strong> 
 
 
                                         </div class="container justify-content page" id="widgets">
@@ -76,7 +102,7 @@
                                     <div class="box-breadcrumb">
                                         <div class="box-left">
                                             <strong class="parent">
-                                                <a href="{% url 'project' random_post.title %}">Trending Site</a>
+                                                <a href="{% url 'post' random_post.title %}">Trending Site</a>
                                             </strong>
                                             <span class="text-x-thin">{{random_post.date|date}}</span>
                                         </div>
@@ -101,15 +127,15 @@
                 <div class="col">
                     <div class="card shadow-sm">
                         <div class="link-via-image">
-                            <img class="card-img-top" src="{{ post.image.url}}"
+                            <img class="card-img-top" src="{{ post.image}}"
                                  alt="{{photo.title}}">
-                            <a href="{% url 'project' random_post.title %}">
+                            <a href="{% url 'post' random_post.title %}">
                                 <div class="mask rgba-white-slight"></div>
                             </a>
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="{% url 'project' post.title %}">{{post.title|title}}</a>
+                                <a href="{% url 'post' post.title %}">{{post.title|title}}</a>
                             </h4>
                             <p class="card-text">{{post.description}}</p>
                             

@@ -63,7 +63,7 @@ def  signup(request):
 
 @login_required(login_url='login')
 def profile(request, username):
-    return render(request, 'profile.html')
+    return render(request, 'awwards/profile.html')
 
 
 @login_required(login_url='login')   
@@ -142,7 +142,7 @@ def  projectPost(request,post):
         'rating_form':form,
     }       
            
-    return render(request, 'post.html',context)
+    return render(request, 'awwards/post.html',context)
 
 
 def  search_project(request):
@@ -155,11 +155,11 @@ def  search_project(request):
             'message': message, 
             'results': results
         }
-        return render(request, 'results.html', context)
+        return render(request, 'awwards/search.html', context)
     else:
         messsage = 'No results found for the specified title'
         
-    return render(request, 'search.html', {'messsage': messages}) 
+    return render(request, 'awwards/search.html', {'messsage': messages}) 
 
 
 # Serializers

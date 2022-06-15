@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,8 +27,9 @@
                       
                         <!-- search field -->
                         <div class="col-md-7">
-                            <form id="form_search" class="d-flex" role="search" action="{% url 'home' %}">
-                              <input id="input_search" class="form-control me-1" type="search" placeholder="Search" aria-label="Search" name="category">
+                            <form id="form_search" class="d-flex" role="search" method="GET" action="{% url 'search' %}">
+                              {% csrf_token %}
+                              <input id="input_search" class="form-control mr-sm-2 " type="text" placeholder="Search" name="title" aria-label="Search">
                               <button id="button_search" class="btn " type="submit"><span class="iconify" data-icon="bi:search-heart"></span></button>
                             </form>
                         </div>
@@ -46,13 +48,13 @@
                                   <a class="btn " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><span class="iconify" data-icon="healthicons:ui-user-profile"></span></a>
                 
                                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="{%url 'home'%}">Home</a></li>
-                                    <li><a class="dropdown-item" href="/accounts/password_change">Change Password</a></li>
-                                    <li><a class="dropdown-item" href="/accounts/logout">Logout</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'profile' user.username %}">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'edit' user.username %}">Edit profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout'%}">Logout</a></li>
                                   </ul>
                               {% else %}
                               <li>
-                                <a class='btn btn-default' href="/registration/login">Login</a>
+                                <a class='btn btn-default' href="{% url 'login' %}">Login</a>
                               </li>
                 
                               {% endif %}
