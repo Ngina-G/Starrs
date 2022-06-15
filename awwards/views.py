@@ -145,7 +145,7 @@ def  search_project(request):
     else:
         messsage = 'No results found for the specified title'
         
-    return render(request, 'results.html', {'messsage': messages}) 
+    return render(request, 'search.html', {'messsage': messages}) 
 
 
 # Serializers
