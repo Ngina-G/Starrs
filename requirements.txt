@@ -15,6 +15,7 @@ django-tinymce==3.4.0
 djangorestframework==3.13.1
 dnspython==2.2.1
 email-validator==1.2.1
+gunicorn==20.1.0
 h11==0.12.0
 httpcore==0.13.7
 httpx==0.18.2
