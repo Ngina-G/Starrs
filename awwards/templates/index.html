@@ -9,7 +9,7 @@
 
             <div id="post">
                   <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style="background-image: url(https://ucarecdn.com/3f8ea7a7-df8a-4d9a-9974-f0ca7fbdc70a/-/scale_crop/1000x1000/smart/);">
                         <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -46,58 +46,65 @@
                                 </div>
                                 <div class="container">
                                     <div style="margin-bottom: 3em;">
-                                        by <strong><a href="{% url 'profile' user.username %}">{{ random_post.user.username }}</a></strong> 
-
-
-                                        </div class="container justify-content page" id="widgets">
-                                                <div class="row clearfix">
+                                        by <strong><a href="">{{ random_post.user.username }}</a></strong> 
+                                    </div>
+                                    <div class="mask rgba-black-slight">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-6 d-flex flex-row mx-auto mt-1">
                                                     {% for rating in random_post.ratings.all %}
                                                     {% if forloop.counter is random_post.ratings.all.count %}
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-3">
-                                                        <div class="c100 p90 orange ">
+                                                    <!-- design -->
+                                                    <div id="design"><br>
+                                                        <div class="c100 orange">
                                                             <span>{{rating.design_average}}</span>
                                                             <div class="slice">
                                                                 <div class="bar"></div>
                                                                 <div class="fill"></div>
                                                             </div>
                                                         </div>
-                                                        
+                                                        <div>
+                                                            <span class="rates"><h2>design</h2></span>
+                                                        </div>
                                                     </div>
-                                                    
-                                                    <div class="col-md-3">
-                                                        <div class="c100 p65 orange">
-                                                            <span>{{rating.usability_average}}</span>
+                    
+                                                    <!-- usability -->
+                                                    <div id="usable" class="mx-auto"><br>
+                                                        <div class="c100 orange">
+                                                            <span>{{ rating.usability_average }}</span>
                                                             <div class="slice">
                                                                 <div class="bar"></div>
                                                                 <div class="fill"></div>
                                                             </div>
                                                         </div>
-                                                        
+                                                        <div>
+                                                            <span class="rates"><h2>usability</h2></span>
+                                                        </div>
                                                     </div>
-                                                
-                                                    <div class="col-md-3">
-                                                        <div class="c100 p75 orange">
-                                                            <span>{{rating.content_average}}</span>
+                                                    <!-- content -->
+                                                    <div id="content"><br>
+                                                        <div class="c100 orange">
+                                                            <span>{{ rating.content_average }}</span>
                                                             <div class="slice">
                                                                 <div class="bar"></div>
                                                                 <div class="fill"></div>
                                                             </div>
                                                         </div>
+                                                        <div>
+                                                            <span class="rates"><h2>content</h2></span>
+                                                        </div>
                                                     </div>
-
-                                                    <div class="row">
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-2"><h2>DESIGN</h2></div>
-                                                        <div class="col-md-4"><h2>USABILITY</h2></div>
-                                                        <div class="col-md-3"><h2>CONTENT</h2></div>
-                                                    </div>
-                                               
+                    
                                                     {% endif %}
                                                     {% endfor %}
                                                 </div>
+                                                <div class="col-md-3"></div>
+                                            </div>
                                         </div>
-                            </div>
+                    
+                                    </div>
+                                </div>
                                 <div class="card-body">
                                     <div class="box-breadcrumb">
                                         <div class="box-left">
@@ -127,8 +134,7 @@
                 <div class="col">
                     <div class="card shadow-sm">
                         <div class="link-via-image">
-                            <img class="card-img-top" src="{{ post.image}}"
-                                 alt="{{photo.title}}">
+                            <img class="card-img-top" src="{{ post.image}}" alt="{{photo.title}}">
                             <a href="{% url 'post' random_post.title %}">
                                 <div class="mask rgba-white-slight"></div>
                             </a>

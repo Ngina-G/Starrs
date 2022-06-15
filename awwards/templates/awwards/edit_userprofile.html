@@ -1,30 +1,55 @@
-
-
-
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container" style="margin-top:7%;">
-    <p style="margin-top:10%">User / Settings / Profile settings</p>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="card" style="margin-top:2%; padding:20px">
-                <div class="card-body">
-                    <h5 class="card-title"><a>Update Your Profile</a></h5>
-                    <div class="card-text">
-                        <form action="" method="post" enctype="multipart/form-data" novalidate>
-                            {% csrf_token %}
-                            {{ user_form|crispy }}
-                            {{ prof_form|crispy }}
-                            <input type="submit" class="btn btn-sm btn-info" value="Save"/>
-                        </form>
+<div class="container">
+    <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile text-center">
+                                <div class="user-avatar">
+                                    <img src="{{ user.profile.profile_image.url }}" class="rounded-circle img-fluid" alt="Profile image">
+                                </div>
+                                <h5 class="user-name mt-3">{{user.profile.name}}</h5>
+                                <h6 class="user-email">{{user.profile.email}}</h6>
+                            </div>
+                            <div class="about text-center mt-3">
+                                <h5>About</h5>
+                                <p>{{user.profile.bio}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100 ">
+                    <div class="card-body">
+                        <div class="col"></div>
+
+                        <div class="col">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Personal Details</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <form action="" method="post" enctype="multipart/form-data" novalidate>
+                                    {% csrf_token %}
+                                    {{ user_form|crispy }}
+                                    {{ prof_form|crispy }}
+                                    <input type="submit" class="btn btn-sm btn-primary" value="Save"/>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col"></div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3"></div>
     </div>
-</div>
+
 {% endblock %}

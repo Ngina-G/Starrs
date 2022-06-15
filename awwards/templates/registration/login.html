@@ -1,28 +1,55 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container" style="margin-top:7%;">
+{{block.super}}
 
+<div class="container" id="login">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="card" style="margin-top:14%; padding:20px">
-                <div class="card-body">
-                    <h5 class="card-title"><a>Sign in to continue</a> <span style="float:right">Not a member yet? <a
-                            href="{% url 'signup' %}" class="text-info">Register now</a></span></h5>
-                    <div class="card-text">
-                        <form action="" method="post" novalidate >
-                            {% csrf_token%}
-                            {{ form|crispy}}
-                            <button type="submit" class="btn btn-info btn-sm">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+        <div class="col">
+            <img src="https://ucarecdn.com/c2033f3a-8129-4b49-9989-3e4d463bbb89/-/preview/-/quality/smart/" alt="Responsive image" class="img-fluid w-100" id="bckg-img" srcset="" style="padding: 4em;">
         </div>
-        <div class="col-md-2"></div>
-    </div>
+        <div class="col">
+            <section class="mx-auto my-5" style="max-width: 23rem;">
+        
+                <div class="card card-form mt-2 mb-4">
+                  <div class="card-body rounded-top pink darken-4">
+                    <h5 class="font-weight-bold text-center text-uppercase text-dark my-4">Log in</h5>
+                    <form action="" method="post" novalidate class="pb-5 px-2" _lpchecked="1">
+                      <div class="d-flex justify-content-start align-items-center mb-4">
+                        <i class="far fa-user fa-lg text-white fa-fw me-3"></i>
+                        <div class="form-outline form-white w-100">
+          
+                          {% csrf_token%}
+                            {{ form|crispy}}
+                            <button class="btn btn-warning btn-rounded btn-block my-4 ml-5 z-depth-0" type="submit">Sign in</button>
+                            
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+          
+                  <div class="card card-form-2 mb-0 z-depth-0">
+                    <div class="card-body">
+                      <form class="text-center">
+                        
+                        <p>or <a href="{% url 'signup' %}" class="text-info">sign up</a> for an account</p>
+                        <i class="fab fa-lg fa-facebook-f pink-accent-text px-2"></i>
+                        <i class="fab fa-lg fa-twitter pink-accent-text px-2"></i>
+                        <i class="fab fa-lg fa-linkedin-in pink-accent-text px-2"></i>
+                        <i class="fab fa-lg fa-github pink-accent-text px-2"></i>
+                        <hr>
+                        <p>By clicking
+                          <em>Sign up</em> you agree to our
+                          <a class="pink-accent-text" href="#!" target="_blank">terms of service</a>. </p>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+              </section>
+        </div>
 
-</div>
+    </div>
+    
+  </div>
 {% endblock %}

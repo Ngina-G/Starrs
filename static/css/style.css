@@ -69,7 +69,32 @@ div {
     border: 5px solid #fff;
     border-radius: 50%;
   }
+#login {
+	background-color: #cfe2e8;
+    background-image: url(https://ucarecdn.com/3f8ea7a7-df8a-4d9a-9974-f0ca7fbdc70a/-/scale_crop/1000x1000/smart/);
+}
+nav {
+	background-color: balck;
+    background-image: url(#cfe2e8);
+}
+.pink.darken-4 {
+  background-color: #cfe2e8;
+}
+.red-checkbox .form-check-input:checked:focus:before {
+  box-shadow: 0 0 0 13px #cfe2e8;
+}
 
+.card-form .card-form-2 {
+  -webkit-border-top-left-radius: 21px;
+  border-top-left-radius: 21px;
+  -webkit-border-top-right-radius: 21px;
+  border-top-right-radius: 21px;
+  margin-top: -35px;
+  }
+
+.card-form .card-form-2 .pink-accent-text {
+  color: #c51162;
+}
 
 
 
