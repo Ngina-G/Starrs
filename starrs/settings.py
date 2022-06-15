@@ -43,11 +43,18 @@ INSTALLED_APPS = [
     'tinymce',
     'pyuploadcare.dj',
     'rest_framework',
+    'rest_framework.authtoken',
     'crispy_forms',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
 UPLOADCARE = {
-    'pub_key':'1d111b4d2405fb153a7',
+    'pub_key':'50a85fc3a8705a6dd08c',
     'secret': '',
 }
 
@@ -131,7 +138,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     Path.joinpath(BASE_DIR, 'static')
 ]
@@ -139,8 +147,7 @@ STATICFILES_DIRS = [
 # Media
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = Path.joinpath(BASE_DIR, 'static/')
-STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -152,3 +159,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'index'
 
 LOGOUT_REDIRECT_URL = 'index'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
