@@ -2,24 +2,53 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {{block.super}}
-<h2 class="text-center" style="margin-top: 2rem;">Who am I?</h2>
-<div class="container">
-    <section class="mx-auto my-5" style="max-width: 18rem;">
+<div style="background-image: url(https://ucarecdn.com/3f8ea7a7-df8a-4d9a-9974-f0ca7fbdc70a/-/scale_crop/1000x1000/smart/); padding: 2em;">
+  <h2 class="text-center" style="margin-top: 2rem;">Who am I?</h2>
+  <div class="container">
+      <section class="mx-auto my-5" style="max-width: 18rem;">
+          
+        <div class="card testimonial-card mt-2 mb-3">
+          <div class="card-up aqua-gradient"></div>
+          <div class="avatar mx-auto white">
+            <img src="{{ user.profile.profile_image.url }}" class="rounded-circle img-fluid"
+              alt="woman avatar">
+          </div>
+          <div class="card-body text-center">
+            <h4 class="card-title font-weight-bold">{{user.username}}</h4>
+            <hr>
+            <p><a href="{{user.email}}" style="text-decoration: none; color: black;">{{user.email}}</a></p>
+          </div>
+        </div>
         
-      <div class="card testimonial-card mt-2 mb-3">
-        <div class="card-up aqua-gradient"></div>
-        <div class="avatar mx-auto white">
-          <img src="{{ user.profile.profile_image.url }}" class="rounded-circle img-fluid"
-            alt="woman avatar">
-        </div>
-        <div class="card-body text-center">
-          <h4 class="card-title font-weight-bold">{{user.username}}</h4>
-          <hr>
-          <p><a href="{{user.email}}" style="text-decoration: none; color: black;">{{user.email}}</a></p>
-        </div>
+      </section>
+    </div>
+
+</div>
+
+  <div id="post">
+    <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style="background-image: url(https://ucarecdn.com/3f8ea7a7-df8a-4d9a-9974-f0ca7fbdc70a/-/scale_crop/1000x1000/smart/);">
+          <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Upload a project</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form action="" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      {{ form|crispy }}
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                          <input type="submit"  class="btn btn-sm btn-info" value= "Save changes">
+                      </div>
+                  </form>
+              
+              </div>
+          
+          </div>
+          </div>
       </div>
-      
-    </section>
-  </div>
+</div>
 
 {% endblock %}

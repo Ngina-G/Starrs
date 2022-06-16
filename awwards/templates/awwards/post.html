@@ -114,5 +114,31 @@
         </div>
 
     </div>
+    <div id="post">
+        <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  style="background-image: url(https://ucarecdn.com/3f8ea7a7-df8a-4d9a-9974-f0ca7fbdc70a/-/scale_crop/1000x1000/smart/);">
+              <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Upload a project</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <form action="" method="post" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          {{ form|crispy }}
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                              <input type="submit"  class="btn btn-sm btn-info" value= "Save changes">
+                          </div>
+                      </form>
+                  
+                  </div>
+              
+              </div>
+              </div>
+          </div>
+  </div>
 </div>
+
 {% endblock %}

@@ -8,7 +8,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 import random
-
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
 # Create your views here.
 def  index(request):
     if request.method == 'POST':
@@ -63,7 +64,16 @@ def  signup(request):
 
 @login_required(login_url='login')
 def profile(request, username):
-    return render(request, 'awwards/profile.html')
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False )
+            post.user = request.user
+            post.save()
+    else:
+        form = PostForm()      
+
+    return render(request, 'awwards/profile.html', {'form': form})
 
 
 @login_required(login_url='accounts/login')   
@@ -81,23 +91,26 @@ def  user_profile(request, username):
 def  edit_userprofile(request, username):
     user = User.objects.get(username=username)
     if request.method == 'POST': 
-        user_form = UpdateUserForm(request.POST, instance=request.user)
         prof_form = UpdateUserProfileForm(request.POST, request. FILES,instance=request.user.profile)
-        if user_form.is_valid() and prof_form.is_valid:
-            user_form.save()
-            prof_form.save(commit=False)
+        form = PostForm(request.POST)
+        if prof_form.is_valid() & form.is_valid():
+            post = form.save(commit=False )
+            post.user = request.user
+            post.save()
+            prof_form.save()
             return redirect('profile',user.username)
         
     else:
-        user_form = UpdateUserForm(instance=request.user)
         prof_form = UpdateUserProfileForm(instance=request.user.profile)
+        form = PostForm()
         
     context = {
-        'user_form': user_form,
         'prof_form': prof_form,
+        'form': form
     }         
         
     return render(request, 'awwards/edit_userprofile.html',context)
+
 
 @login_required(login_url='login')  
 def  projectPost(request,post):
@@ -112,7 +125,11 @@ def  projectPost(request,post):
         
     if request.method == 'POST':
         form = RatingForm(request.POST) 
-        if form.is_valid():
+        form_post = PostForm(request.POST)
+        if form.is_valid() &  form_post.is_valid():
+            post = form.save(commit=False )
+            post.user = request.user
+            post.save()
             rate = form.save(commit =False)
             rate.user = request.user
             rate.post = post
@@ -136,10 +153,12 @@ def  projectPost(request,post):
     
     else:
         form = RatingForm()
+        form_post = PostForm()
     context = {
         'post':post,
         'rating_status':rating_status,
         'rating_form':form,
+        'form' : form_post,
     }       
            
     return render(request, 'awwards/post.html',context)
